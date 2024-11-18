@@ -4,7 +4,10 @@ This is an integration for the national rail API into home assistant.
 This allows you to have a schedule of the train at your station in your home assistant.
 
 # Installation
+#HACS
+This repo is HACS compatible and can be added in to the custom repositories in HACS
 
+## Manual
 1. Register with national rail to get an api token [here](http://realtime.nationalrail.co.uk/OpenLDBWSRegistration/)
 2. Copy the custom_components/nationalrailuk folder into your config/custom_components folder and restart home assistant
 3. Find the crs code for your origin and destination station using the [National Rail website](https://www.nationalrail.co.uk/). If you live in Weybridge and commutte to Waterloo, the codes are WYB and WAT
@@ -12,6 +15,10 @@ This allows you to have a schedule of the train at your station in your home ass
 5. This should create 2 sensors `sensor.train_schedule_wyb_wat` and `sensor.train_schedule_wat_wyb`
 
 # Integration within the UI
+
+## Custom Card
+A custom card for this integration can be found here:
+https://github.com/plutomedia987/lovelace-nationalrail
 
 ## Disruption Sensor
 
