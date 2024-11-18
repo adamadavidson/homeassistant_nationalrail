@@ -4,7 +4,7 @@ This is an integration for the national rail API into home assistant.
 This allows you to have a schedule of the train at your station in your home assistant.
 
 # Installation
-#HACS
+## HACS
 This repo is HACS compatible and can be added in to the custom repositories in HACS
 
 ## Manual
