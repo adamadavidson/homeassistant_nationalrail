@@ -128,6 +128,9 @@ class NationalRailClient:
                             batch["trainServices"]["service"]
                         )
 
+        # with open("output.txt", "w") as convert_file:
+        #     convert_file.write(str(res))
+
         return res
 
     def timeConvert(self, time_base, sheduled, estimated, actual):
@@ -181,9 +184,9 @@ class NationalRailClient:
         # _LOGGER.debug("Data for processing: %s", json_message)
 
         res = {}
+        res["dests"] = {}
 
         for each in self.destinations:
-            res["dests"] = {}
             res["dests"][each] = {}
 
             res["station"] = json_message_in[each]["locationName"]
@@ -348,6 +351,8 @@ class NationalRailClient:
                     "locationName"
                 ]
 
+        # with open("output_" + self.station + ".txt", "w") as convert_file:
+        #     convert_file.write(str(res))
         return res
 
     async def async_get_data(self):
