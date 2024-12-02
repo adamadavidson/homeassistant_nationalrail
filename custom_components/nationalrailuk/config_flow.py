@@ -1,4 +1,5 @@
 """Config flow for National Rail UK integration."""
+
 from __future__ import annotations
 
 import logging
@@ -10,6 +11,7 @@ from homeassistant import config_entries
 from homeassistant.core import HomeAssistant
 from homeassistant.data_entry_flow import FlowResult
 from homeassistant.exceptions import HomeAssistantError
+from homeassistant.helpers.selector import selector
 
 from .client import (
     NationalRailClient,
@@ -18,13 +20,19 @@ from .client import (
 )
 from .const import CONF_DESTINATIONS, CONF_STATION, CONF_TOKEN, DOMAIN
 
+from .crs import CRS
+
 _LOGGER = logging.getLogger(__name__)
 
 STEP_USER_DATA_SCHEMA = vol.Schema(
     {
         vol.Required(CONF_TOKEN): str,
-        vol.Required(CONF_STATION): str,
-        vol.Optional(CONF_DESTINATIONS): str,
+        vol.Required(CONF_STATION): selector(
+            {"select": {"options": CRS, "custom_value": True}}
+        ),
+        vol.Optional(CONF_DESTINATIONS): selector(
+            {"select": {"options": CRS, "multiple": True, "custom_value": True}}
+        ),
     }
 )
 
@@ -81,7 +89,8 @@ class ConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
 
         user_input[CONF_STATION] = user_input[CONF_STATION].strip().upper()
         user_input[CONF_DESTINATIONS] = (
-            user_input[CONF_DESTINATIONS].strip().replace(" ", "").upper()
+            # user_input[CONF_DESTINATIONS].strip().replace(" ", "").upper()
+            (",".join(user_input[CONF_DESTINATIONS])).upper()
         )
 
         errors = {}
