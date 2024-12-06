@@ -1,6 +1,5 @@
 {
-    "name": "homeassistant_nationalrail",
+    "name": "National Rail",
     "render_readme": true,
-    "country": "GB",
-    "filename":"homeassistant_nationalrail.js"
+    "country": "GB"
   }
