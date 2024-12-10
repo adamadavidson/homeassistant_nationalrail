@@ -358,9 +358,9 @@ class NationalRailClient:
 
                 for otherEnd in status["trains"]:
                     if "otherEnd" in otherEnd:
-                        res["dests"][each]["displayName"] = status["trains"][0][
-                            "otherEnd"
-                        ]["locationName"]
+                        res["dests"][each]["displayName"] = otherEnd["otherEnd"][
+                            "locationName"
+                        ]
                         break
 
         # with open("output_" + self.station + ".txt", "w") as convert_file:
