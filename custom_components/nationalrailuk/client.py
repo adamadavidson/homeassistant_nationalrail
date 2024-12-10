@@ -1,6 +1,8 @@
 """Client for the National Rail API"""
 
 import logging
+
+import datetime
 from datetime import datetime, timedelta
 
 from zeep import AsyncClient, Settings, xsd
@@ -212,6 +214,9 @@ class NationalRailClient:
                         None,
                     )
 
+                    if times["sheduled"] is None and times["estimated"] is None:
+                        times["estimated"] = rebuild_date(time_base, "23:59")
+
                     # time = rebuild_date(time_base, service[ft["sheduledTag"]])
 
                     # if service[ft["estimatedTag"]] == "On time":
@@ -340,6 +345,9 @@ class NationalRailClient:
 
                     status["trains"].append(train)
 
+                # with open("output_test.txt", "w") as convert_file:
+                #     convert_file.write(str(status["trains"]))
+
                 status["trains"] = sorted(
                     status["trains"],
                     key=lambda d: d["expected"]
@@ -347,9 +355,13 @@ class NationalRailClient:
                     else d["scheduled"],
                 )
                 res["dests"][each][ft["displayName"]] = status
-                res["dests"][each]["displayName"] = status["trains"][0]["otherEnd"][
-                    "locationName"
-                ]
+
+                for otherEnd in status["trains"]:
+                    if "otherEnd" in otherEnd:
+                        res["dests"][each]["displayName"] = status["trains"][0][
+                            "otherEnd"
+                        ]["locationName"]
+                        break
 
         # with open("output_" + self.station + ".txt", "w") as convert_file:
         #     convert_file.write(str(res))

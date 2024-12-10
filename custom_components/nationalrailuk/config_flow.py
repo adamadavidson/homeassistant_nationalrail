@@ -47,7 +47,7 @@ async def validate_input(hass: HomeAssistant, data: dict[str, Any]) -> dict[str,
     # validate the token by calling a known line
 
     try:
-        my_api = NationalRailClient(data[CONF_TOKEN], "WAT", ["CHK"])
+        my_api = NationalRailClient(data[CONF_TOKEN], "STP", ["ZFD"])
         res = await my_api.async_get_data()
     except NationalRailClientInvalidToken as err:
         _LOGGER.exception(err)
