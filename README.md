@@ -3,18 +3,23 @@
 This is an integration for the national rail API into home assistant.
 This allows you to have a schedule of the train at your station in your home assistant.
 
+1. Register with national rail to get an api token [here](http://realtime.nationalrail.co.uk/OpenLDBWSRegistration/)
+   
 # Installation
 ## HACS
 This repo is HACS compatible and can be added in to the custom repositories in HACS
 
 [![Open your Home Assistant instance and open a repository inside the Home Assistant Community Store.](https://my.home-assistant.io/badges/hacs_repository.svg)](https://my.home-assistant.io/redirect/hacs_repository/?owner=plutomedia987&repository=homeassistant_nationalrail&category=Integration)
 
+Todo: Below this line needs an update
+
+---
+
 ## Manual
-1. Register with national rail to get an api token [here](http://realtime.nationalrail.co.uk/OpenLDBWSRegistration/)
-2. Copy the custom_components/nationalrailuk folder into your config/custom_components folder and restart home assistant
-3. Find the crs code for your origin and destination station using the [National Rail website](https://www.nationalrail.co.uk/). If you live in Weybridge and commutte to Waterloo, the codes are WYB and WAT
-4. You need to add 2 integration for for monitoring your morning journey WYB to WAT and one for your evening route WAT to WYB
-5. This should create 2 sensors `sensor.train_schedule_wyb_wat` and `sensor.train_schedule_wat_wyb`
+1. Copy the custom_components/nationalrailuk folder into your config/custom_components folder and restart home assistant
+2. Find the crs code for your origin and destination station using the [National Rail website](https://www.nationalrail.co.uk/). If you live in Weybridge and commutte to Waterloo, the codes are WYB and WAT
+3. You need to add 2 integration for for monitoring your morning journey WYB to WAT and one for your evening route WAT to WYB
+4. This should create 2 sensors `sensor.train_schedule_wyb_wat` and `sensor.train_schedule_wat_wyb`
 
 # Integration within the UI
 
