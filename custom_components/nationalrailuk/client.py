@@ -328,9 +328,6 @@ class NationalRailClient:
                     ############################################################
                     # Assign outputs
                     ############################################################
-                    if otherEnd:
-                        train["otherEnd"] = otherEnd
-
                     train["scheduled"] = times["sheduled"]
                     train["expected"] = times["estimated"]
                     train["origin"] = service["origin"]["location"][0]["locationName"]
@@ -343,7 +340,9 @@ class NationalRailClient:
                     train["length"] = service["length"]
                     train["callingPoints"] = callingPoints
 
-                    status["trains"].append(train)
+                    if otherEnd:
+                        train["otherEnd"] = otherEnd
+                        status["trains"].append(train)
 
                 # with open("output_test.txt", "w") as convert_file:
                 #     convert_file.write(str(status["trains"]))
