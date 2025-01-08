@@ -123,12 +123,13 @@ class NationalRailClient:
                         res[each]["filterLocationName"] = batch["filterLocationName"]
                         res[each]["filtercrs"] = batch["filtercrs"]
 
-                    if not res[each][ft["keyName"]]:
-                        res[each][ft["keyName"]] = batch["trainServices"]["service"]
-                    else:
-                        res[each][ft["keyName"]].append(
-                            batch["trainServices"]["service"]
-                        )
+                    if batch["trainServices"]:
+                        if not res[each][ft["keyName"]]:
+                            res[each][ft["keyName"]] = batch["trainServices"]["service"]
+                        else:
+                            res[each][ft["keyName"]].append(
+                                batch["trainServices"]["service"]
+                            )
 
         # with open("output.txt", "w") as convert_file:
         #     convert_file.write(str(res))
@@ -201,7 +202,8 @@ class NationalRailClient:
                 status["trains"] = []
 
                 if not services_list:
-                    return status
+                    res["dests"][each][ft["displayName"]] = {}
+                    continue
 
                 for service in services_list:
                     train = {}
